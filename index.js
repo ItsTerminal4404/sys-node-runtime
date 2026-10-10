@@ -1,6 +1,8 @@
 const express = require('express');
 const { createServer } = require('http');
-const wisp = require('@mercuryworkshop/wisp-js');
+// Change line 3 to look exactly like this:
+const wisp = require('wisp-client-js');
+
 
 const app = express();
 const server = createServer(app);
