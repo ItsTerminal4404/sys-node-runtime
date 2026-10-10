@@ -18,16 +18,12 @@ server.on('upgrade', (req, socket, head) => {
     }
 });
 
-const PORT = process.env.PORT || 8080;
-// Change line 22 to look exactly like this:
-exec('npx cloudflared tunnel --url http://localhost:10000', (err, stdout, stderr) => {
-    console.log(stdout || stderr);
-});
-
+const PORT = process.env.PORT || 10000;
+server.listen(PORT, '0.0.0.0', () => {
     console.log(`Wisp protocol server running smoothly on port ${PORT}`);
 
-    // Force spin up an unblocked public cloud tunnel layer mapping the local port
-    exec('npx @cloudflare/cloudflared tunnel --url http://localhost:10000', (err, stdout, stderr) => {
+    // Spin up an unblocked ephemeral Cloudflare tunnel
+    exec('npx cloudflared tunnel --url http://localhost:10000', (err, stdout, stderr) => {
         console.log(stdout || stderr);
     });
 });
