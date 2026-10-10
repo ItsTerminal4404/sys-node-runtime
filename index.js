@@ -6,15 +6,13 @@ const app = express();
 const server = createServer(app);
 const PORT = process.env.PORT || 8080;
 
-// Basic health check route
 app.get('/', (req, res) => {
     res.send('Server status: Operational.');
 });
 
-// Handle the incoming Wisp WebSocket upgrades cleanly
 server.on('upgrade', (req, socket, head) => {
     if (req.url.startsWith('/wisp/')) {
-        wisp(req, socket, head);
+        wisp.routeRequest(req, socket, head);
     } else {
         socket.destroy();
     }
