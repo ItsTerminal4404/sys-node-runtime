@@ -20,6 +20,8 @@ server.on('upgrade', (req, socket, head) => {
     }
 });
 
-server.listen(PORT, () => {
+// Old version was: server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
     console.log(`Wisp server running smoothly on port ${PORT}`);
 });
+
